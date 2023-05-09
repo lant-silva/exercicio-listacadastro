@@ -38,21 +38,14 @@ public class ModificacaoCadastroController implements ICadastroController{
 			BufferedReader buffer = new BufferedReader(leitor);
 			String linha = buffer.readLine();
 			linha = buffer.readLine();
+			int i = 0;
 			while(linha!=null) {
 				String[] lista = linha.split(";");
 				cliente = new Cliente(lista[0], lista[1], Integer.parseInt(lista[2]), Double.parseDouble(lista[3]));
 				
 				if(cliente.getIdade() >= idadeMin && cliente.getIdade() <= idadeMax && cliente.getLimiteCredito() > limiteCredito) {
-					try {
-						if(clientes.isEmpty()) {
-							clientes.addFirst(cliente);
-						}else {
-							clientes.addLast(cliente);
-						}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+						clientes.add(cliente, i);
+						i++;
 				}
 				linha = buffer.readLine();
 			}
